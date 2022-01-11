@@ -1,1 +1,1 @@
-# smart-shelf-android
+# Smart shelf Android App
