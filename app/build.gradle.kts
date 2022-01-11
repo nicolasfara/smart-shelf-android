@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    compileSdk = 31
 
     defaultConfig {
         applicationId = "it.unibo.sc"
         minSdk = 26
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 1
         versionName = "0.1.0"
 
@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            // minifyEnabled = (false)
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
