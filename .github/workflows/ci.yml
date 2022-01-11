@@ -1,0 +1,39 @@
+name: build and test
+on:
+  push:
+    tags: ['*']
+    branches-ignore:
+      - 'autodelivery**'
+      - 'bump-**'
+      - 'renovate/**'
+      - 'feature/**'
+      - 'fix/**'
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+      - 'README.md'
+      - 'renovate.json'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        java-version: [11]
+    name: Build and test
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup Java
+        uses: actions/setup-java@v2.5.0
+        with:
+          distribution: 'adopt'
+          java-version: ${{ matrix.java-version }}
+          cache: 'gradle'
+
+      - name: Build and test project
+        run: ./gradlew build
