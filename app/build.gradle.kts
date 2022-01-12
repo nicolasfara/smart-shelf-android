@@ -1,7 +1,13 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import java.io.File
+import java.net.URL
+import java.nio.file.Files
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("it.nicolasfarabegoli.conventional-commits") version "1.0.1"
+    id("io.gitlab.arturbosch.detekt") version "1.19.0"
 }
 
 android {
@@ -52,4 +58,9 @@ dependencies {
     androidTestImplementation("io.kotest:kotest-assertions-core-jvm:5.0.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0")
+}
+
+detekt {
+    config = files(File(projectDir, "detekt.yml"))
 }

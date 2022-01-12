@@ -3,6 +3,9 @@ package it.unibo.sc
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
+/**
+ * Main activity.
+ */
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
