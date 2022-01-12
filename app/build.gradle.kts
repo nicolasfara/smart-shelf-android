@@ -1,7 +1,4 @@
-import io.gitlab.arturbosch.detekt.Detekt
 import java.io.File
-import java.net.URL
-import java.nio.file.Files
 
 plugins {
     id("com.android.application")
@@ -29,10 +26,15 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
+
     compileOptions {
         sourceCompatibility(JavaVersion.VERSION_11)
         targetCompatibility(JavaVersion.VERSION_11)
