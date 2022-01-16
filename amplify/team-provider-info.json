@@ -1,0 +1,20 @@
+{
+  "sc": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-smartshelffrontend-sc-190309-authRole",
+      "UnauthRoleArn": "arn:aws:iam::106885871397:role/amplify-smartshelffrontend-sc-190309-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::106885871397:role/amplify-smartshelffrontend-sc-190309-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-smartshelffrontend-sc-190309-deployment",
+      "UnauthRoleName": "amplify-smartshelffrontend-sc-190309-unauthRole",
+      "StackName": "amplify-smartshelffrontend-sc-190309",
+      "StackId": "arn:aws:cloudformation:eu-west-1:106885871397:stack/amplify-smartshelffrontend-sc-190309/e8287f50-73d1-11ec-84dd-0ac1082ccc3f",
+      "AmplifyAppId": "d271yjt35myuud"
+    },
+    "categories": {
+      "auth": {
+        "smartshelffrontend0a68706f": {}
+      }
+    }
+  }
+}
