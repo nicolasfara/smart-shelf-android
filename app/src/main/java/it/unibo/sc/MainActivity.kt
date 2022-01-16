@@ -2,17 +2,25 @@ package it.unibo.sc
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.amplifyframework.AmplifyException
+import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
-import com.amplifyframework.core.Amplify
+import com.amplifyframework.auth.result.AuthSignInResult
+import com.amplifyframework.kotlin.core.Amplify
 import it.unibo.sc.databinding.ActivityMainBinding
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 
 /**
  * Main activity.
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var deferredSession: Deferred<Unit>
+    private lateinit var deferredLogin: Deferred<Unit>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +37,49 @@ class MainActivity : AppCompatActivity() {
             Log.e("MainActivity", "Could not inizialize Amplify", error)
         }
 
+        deferredSession = lifecycleScope.async {
+            if (isUserAuthenticated()) {
+                Log.i("MainActivity", "User already log in")
+                // TODO(Change activity)
+            }
+        }
+
         button.setOnClickListener {
-            Log.i("MainActivity", "CIAOO")
-            Amplify.Auth.signIn(
-                binding.username.text.toString(), binding.password.text.toString(),
-                { result ->
-                    if (result.isSignInComplete) {
-                        Log.i("AuthQuickstart", "Sign in succeeded")
+            deferredLogin = lifecycleScope.async {
+                signInUser(binding.username.text.toString(), binding.password.text.toString())?.let {
+                    if (it.isSignInComplete) {
+                        Log.i("LoginProcess", "Authentication complete")
                     } else {
-                        Log.i("AuthQuickstart", "Sign in not complete")
+                        Toast.makeText(applicationContext, "Login failed", Toast.LENGTH_LONG).show()
                     }
-                },
-                { Log.e("AuthQuickstart", "Failed to sign in", it) }
-            )
+                } ?: Toast.makeText(applicationContext, "Error on Login process", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (deferredLogin.isActive) deferredLogin.cancel()
+        if (deferredSession.isActive) deferredSession.cancel()
+    }
+
+    private suspend fun signInUser(username: String, password: String): AuthSignInResult? {
+        return try {
+            Amplify.Auth.signIn(username, password)
+        } catch (error: AuthException) {
+            Log.e("Login", "Sign in failed", error)
+            null
+        }
+    }
+
+    private suspend fun isUserAuthenticated(): Boolean {
+        return try {
+            val session = Amplify.Auth.fetchAuthSession()
+            Log.i("CheckLoginSession", "Auth session = $session")
+            session.isSignedIn
+        } catch (error: AuthException) {
+            Log.e("CheckLoginSession", "Failed to fetch auth session", error)
+            false
         }
     }
 }
