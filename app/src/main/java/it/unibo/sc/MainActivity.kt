@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             Log.i("MainActivity", "CIAOO")
-            Amplify.Auth.signIn(binding.username.text.toString(), binding.password.text.toString(),
+            Amplify.Auth.signIn(
+                binding.username.text.toString(), binding.password.text.toString(),
                 { result ->
                     if (result.isSignInComplete) {
                         Log.i("AuthQuickstart", "Sign in succeeded")
