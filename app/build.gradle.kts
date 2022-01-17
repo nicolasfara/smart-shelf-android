@@ -1,5 +1,3 @@
-import java.io.File
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -68,5 +66,9 @@ dependencies {
 }
 
 detekt {
-    config = files(File(projectDir, "detekt.yml"))
+    toolVersion = "1.19.0"
+    config = files("detekt.yml")
+    ignoredBuildTypes = listOf("release")
+    ignoredFlavors = listOf("production")
+    ignoredVariants = listOf("productionRelease")
 }
