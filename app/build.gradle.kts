@@ -56,7 +56,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.4.1")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("com.amplifyframework:core:1.31.1")
+    implementation("com.amplifyframework:core:1.31.2")
     testImplementation("io.kotest:kotest-runner-junit5:5.1.0")
     androidTestImplementation("io.kotest:kotest-assertions-core-jvm:5.1.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
