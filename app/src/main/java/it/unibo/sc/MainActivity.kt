@@ -1,7 +1,9 @@
 package it.unibo.sc
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -37,10 +39,12 @@ class MainActivity : AppCompatActivity() {
             Log.e("MainActivity", "Could not inizialize Amplify", error)
         }
 
+        val intent = Intent(this, ItemsActivity::class.java)
+
         deferredSession = lifecycleScope.async {
             if (isUserAuthenticated()) {
-                Log.i("MainActivity", "User already log in")
-                // TODO(Change activity)
+                Log.i("MainActivity", "User already logged in")
+                startActivity(intent)
             }
         }
 
