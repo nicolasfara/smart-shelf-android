@@ -3,7 +3,6 @@ package it.unibo.sc
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -39,26 +38,13 @@ class MainActivity : AppCompatActivity() {
             Log.e("MainActivity", "Could not inizialize Amplify", error)
         }
 
-        val intent = Intent(this, ItemsActivity::class.java)
-
         deferredSession = lifecycleScope.async {
             if (isUserAuthenticated()) {
                 Log.i("MainActivity", "User already logged in")
-                startActivity(intent)
+                startItemsActivity()
             }
         }
-
-        button.setOnClickListener {
-            deferredLogin = lifecycleScope.async {
-                signInUser(binding.username.text.toString(), binding.password.text.toString())?.let {
-                    if (it.isSignInComplete) {
-                        Log.i("LoginProcess", "Authentication complete")
-                    } else {
-                        Toast.makeText(applicationContext, "Login failed", Toast.LENGTH_LONG).show()
-                    }
-                } ?: Toast.makeText(applicationContext, "Error on Login process", Toast.LENGTH_LONG).show()
-            }
-        }
+        button.setOnClickListener { loginProcess() }
     }
 
     override fun onDestroy() {
@@ -85,5 +71,24 @@ class MainActivity : AppCompatActivity() {
             Log.e("CheckLoginSession", "Failed to fetch auth session", error)
             false
         }
+    }
+
+    private fun loginProcess() {
+        deferredLogin = lifecycleScope.async {
+            signInUser(binding.username.text.toString(), binding.password.text.toString())?.let {
+                if (it.isSignInComplete) {
+                    Log.i("LoginProcess", "Authentication complete")
+                    startItemsActivity()
+                } else {
+                    Toast.makeText(applicationContext, "Login failed", Toast.LENGTH_LONG).show()
+                }
+            } ?: Toast.makeText(applicationContext, "Error on Login process", Toast.LENGTH_LONG)
+                .show()
+        }
+    }
+
+    private fun startItemsActivity() {
+        val itemsActivityIntent = Intent(this, ItemsActivity::class.java)
+        startActivity(itemsActivityIntent)
     }
 }

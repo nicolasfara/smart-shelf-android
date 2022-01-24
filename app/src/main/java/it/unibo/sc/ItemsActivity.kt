@@ -21,14 +21,19 @@ class ItemsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val button = binding.logoutButton
-        val intent = Intent(this, MainActivity::class.java)
+        val mainActivityIntent = Intent(this, MainActivity::class.java)
 
         button.setOnClickListener {
             deferredLogout = lifecycleScope.async {
                 singOutUser()
-                startActivity(intent)
+                startActivity(mainActivityIntent)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (deferredLogout.isActive) deferredLogout.cancel()
     }
 
     private suspend fun singOutUser(): Int {
