@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartShelf">
         <activity
-            android:name=".ItemsActivity"
+            android:name=".ProductsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

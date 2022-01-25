@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         deferredSession = lifecycleScope.async {
             if (isUserAuthenticated()) {
                 Log.i("MainActivity", "User already logged in")
-                startItemsActivity()
+                startProductsActivity()
             }
         }
         button.setOnClickListener { loginProcess() }
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             signInUser(binding.username.text.toString(), binding.password.text.toString())?.let {
                 if (it.isSignInComplete) {
                     Log.i("LoginProcess", "Authentication complete")
-                    startItemsActivity()
+                    startProductsActivity()
                 } else {
                     Toast.makeText(applicationContext, "Login failed", Toast.LENGTH_LONG).show()
                 }
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun startItemsActivity() {
-        startActivity(Intent(this, ItemsActivity::class.java))
+    private fun startProductsActivity() {
+        startActivity(Intent(this, ProductsActivity::class.java))
     }
 }
