@@ -1,0 +1,208 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateProductWarehouse(
+  $input: CreateProductWarehouseInput!
+  $condition: ModelProductWarehouseConditionInput
+) {
+  createProductWarehouse(input: $input, condition: $condition) {
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productWarehouseProductId
+  }
+}
+mutation UpdateProductWarehouse(
+  $input: UpdateProductWarehouseInput!
+  $condition: ModelProductWarehouseConditionInput
+) {
+  updateProductWarehouse(input: $input, condition: $condition) {
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productWarehouseProductId
+  }
+}
+mutation DeleteProductWarehouse(
+  $input: DeleteProductWarehouseInput!
+  $condition: ModelProductWarehouseConditionInput
+) {
+  deleteProductWarehouse(input: $input, condition: $condition) {
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productWarehouseProductId
+  }
+}
+mutation CreateProductShelf(
+  $input: CreateProductShelfInput!
+  $condition: ModelProductShelfConditionInput
+) {
+  createProductShelf(input: $input, condition: $condition) {
+    shelfId
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productShelfProductId
+  }
+}
+mutation UpdateProductShelf(
+  $input: UpdateProductShelfInput!
+  $condition: ModelProductShelfConditionInput
+) {
+  updateProductShelf(input: $input, condition: $condition) {
+    shelfId
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productShelfProductId
+  }
+}
+mutation DeleteProductShelf(
+  $input: DeleteProductShelfInput!
+  $condition: ModelProductShelfConditionInput
+) {
+  deleteProductShelf(input: $input, condition: $condition) {
+    shelfId
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productShelfProductId
+  }
+}
+mutation CreateProduct(
+  $input: CreateProductInput!
+  $condition: ModelProductConditionInput
+) {
+  createProduct(input: $input, condition: $condition) {
+    code
+    lot
+    name
+    price
+    promoPrice
+    inPromo
+    expirationDate
+    purchaseDate
+    id
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateProduct(
+  $input: UpdateProductInput!
+  $condition: ModelProductConditionInput
+) {
+  updateProduct(input: $input, condition: $condition) {
+    code
+    lot
+    name
+    price
+    promoPrice
+    inPromo
+    expirationDate
+    purchaseDate
+    id
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteProduct(
+  $input: DeleteProductInput!
+  $condition: ModelProductConditionInput
+) {
+  deleteProduct(input: $input, condition: $condition) {
+    code
+    lot
+    name
+    price
+    promoPrice
+    inPromo
+    expirationDate
+    purchaseDate
+    id
+    createdAt
+    updatedAt
+  }
+}
