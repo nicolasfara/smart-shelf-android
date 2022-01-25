@@ -11,6 +11,9 @@ import it.unibo.sc.databinding.ActivityItemsBinding
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 
+/***
+ * The product list activity.
+ */
 class ItemsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityItemsBinding
     private lateinit var deferredLogout: Deferred<Unit>
