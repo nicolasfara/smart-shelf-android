@@ -48,5 +48,7 @@ class ItemsActivity : AppCompatActivity() {
         }
     }
 
-    private fun startMainActivity() = startActivity(Intent(this, MainActivity::class.java))
+    private fun startMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 }
