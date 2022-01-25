@@ -16,7 +16,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 
 /**
- * Main activity.
+ * The login activity.
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
