@@ -7,20 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.kotlin.core.Amplify
-import it.unibo.sc.databinding.ActivityItemsBinding
+import it.unibo.sc.databinding.ActivityProductsBinding
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 
 /***
  * The product list activity.
  */
-class ItemsActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityItemsBinding
+class ProductsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityProductsBinding
     private lateinit var deferredLogout: Deferred<Unit>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityItemsBinding.inflate(layoutInflater)
+        binding = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val button = binding.logoutButton
