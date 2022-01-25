@@ -87,8 +87,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun startItemsActivity() {
-        val itemsActivityIntent = Intent(this, ItemsActivity::class.java)
-        startActivity(itemsActivityIntent)
-    }
+    private fun startItemsActivity() = startActivity(Intent(this, ItemsActivity::class.java))
 }

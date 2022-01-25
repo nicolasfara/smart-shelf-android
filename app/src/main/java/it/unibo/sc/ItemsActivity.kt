@@ -26,7 +26,7 @@ class ItemsActivity : AppCompatActivity() {
         button.setOnClickListener {
             deferredLogout = lifecycleScope.async {
                 singOutUser()
-                startActivity(mainActivityIntent)
+                startMainActivity()
             }
         }
     }
@@ -44,4 +44,6 @@ class ItemsActivity : AppCompatActivity() {
             Log.e("CheckLogout", "Sign out failed", error)
         }
     }
+
+    private fun startMainActivity() = startActivity(Intent(this, MainActivity::class.java))
 }
