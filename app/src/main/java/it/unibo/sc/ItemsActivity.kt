@@ -24,7 +24,6 @@ class ItemsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val button = binding.logoutButton
-        val mainActivityIntent = Intent(this, MainActivity::class.java)
 
         button.setOnClickListener {
             deferredLogout = lifecycleScope.async {
