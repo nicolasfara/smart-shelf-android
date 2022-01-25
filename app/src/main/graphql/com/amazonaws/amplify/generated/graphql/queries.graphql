@@ -1,0 +1,116 @@
+# this is an auto generated file. This will be overwritten
+query GetProductWarehouse($id: ID!) {
+  getProductWarehouse(id: $id) {
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productWarehouseProductId
+  }
+}
+query ListProductWarehouses(
+  $filter: ModelProductWarehouseFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listProductWarehouses(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      quantity
+      id
+      createdAt
+      updatedAt
+      productWarehouseProductId
+    }
+    nextToken
+  }
+}
+query GetProductShelf($id: ID!) {
+  getProductShelf(id: $id) {
+    shelfId
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productShelfProductId
+  }
+}
+query ListProductShelves(
+  $filter: ModelProductShelfFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listProductShelves(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      shelfId
+      quantity
+      id
+      createdAt
+      updatedAt
+      productShelfProductId
+    }
+    nextToken
+  }
+}
+query GetProduct($id: ID!) {
+  getProduct(id: $id) {
+    code
+    lot
+    name
+    price
+    promoPrice
+    inPromo
+    expirationDate
+    purchaseDate
+    id
+    createdAt
+    updatedAt
+  }
+}
+query ListProducts(
+  $filter: ModelProductFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    nextToken
+  }
+}

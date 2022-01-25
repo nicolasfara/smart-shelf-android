@@ -1,0 +1,18 @@
+projects:
+  smartshelffrontend:
+    schemaPath: app/src/main/graphql/schema.json
+    includes:
+      - app/src/main/graphql/**/*.graphql
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: android
+        generatedFileName: ''
+        docsFilePath: app/src/main/graphql/com/amazonaws/amplify/generated/graphql
+        region: eu-west-1
+        apiId: null
+        maxDepth: 2
+extensions:
+  amplify:
+    version: 3

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.amplifyframework.auth.AuthException
+import com.amplifyframework.datastore.generated.model.Product
 import com.amplifyframework.kotlin.core.Amplify
 import it.unibo.sc.databinding.ActivityProductsBinding
 import kotlinx.coroutines.Deferred
@@ -36,6 +37,18 @@ class ProductsActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         if (deferredLogout.isActive) deferredLogout.cancel()
+    }
+
+    private suspend fun listProducts() {
+        val product = Product.builder()
+
+//        try {
+//
+//            val response = Amplify.API.query(ModelQuery.get(Product::class.java))
+//            Log.i("MyAmplifyApp", response.data.name)
+//        } catch (error: ApiException) {
+//            Log.e("MyAmplifyApp", "Query failed", error)
+//        }
     }
 
     private suspend fun singOutUser(): Int {

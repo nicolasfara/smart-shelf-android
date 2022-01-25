@@ -1,0 +1,181 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateProductWarehouse {
+  onCreateProductWarehouse {
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productWarehouseProductId
+  }
+}
+subscription OnUpdateProductWarehouse {
+  onUpdateProductWarehouse {
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productWarehouseProductId
+  }
+}
+subscription OnDeleteProductWarehouse {
+  onDeleteProductWarehouse {
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productWarehouseProductId
+  }
+}
+subscription OnCreateProductShelf {
+  onCreateProductShelf {
+    shelfId
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productShelfProductId
+  }
+}
+subscription OnUpdateProductShelf {
+  onUpdateProductShelf {
+    shelfId
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productShelfProductId
+  }
+}
+subscription OnDeleteProductShelf {
+  onDeleteProductShelf {
+    shelfId
+    product {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+    }
+    quantity
+    id
+    createdAt
+    updatedAt
+    productShelfProductId
+  }
+}
+subscription OnCreateProduct {
+  onCreateProduct {
+    code
+    lot
+    name
+    price
+    promoPrice
+    inPromo
+    expirationDate
+    purchaseDate
+    id
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateProduct {
+  onUpdateProduct {
+    code
+    lot
+    name
+    price
+    promoPrice
+    inPromo
+    expirationDate
+    purchaseDate
+    id
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteProduct {
+  onDeleteProduct {
+    code
+    lot
+    name
+    price
+    promoPrice
+    inPromo
+    expirationDate
+    purchaseDate
+    id
+    createdAt
+    updatedAt
+  }
+}

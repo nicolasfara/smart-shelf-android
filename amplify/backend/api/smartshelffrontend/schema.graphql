@@ -3,25 +3,23 @@
 input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
 
 type ProductWarehouse @model {
-    product: Products @hasOne
+    product: Product! @hasOne
     quantity: Int!
 }
 
 type ProductShelf @model {
     shelfId: Int!
-    productID: String!
-    product: Products @hasOne(fields: ["productID"])
+    product: Product! @hasOne
     quantity: Int!
 }
 
-type Products @model {
-    id: String! @primaryKey # code + lot
+type Product @model {
     code: String!
     lot: Int!
     name: String!
     price: Float!
     promoPrice: Float
-    inPromo: Boolean!
+    inPromo: Boolean
     expirationDate: AWSDate!
     purchaseDate: AWSDate!
 }
