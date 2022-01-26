@@ -1,14 +1,15 @@
-package it.unibo.sc
+package it.unibo.sc.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.amplifyframework.auth.AuthException
-import com.amplifyframework.datastore.generated.model.Product
 import com.amplifyframework.kotlin.core.Amplify
 import it.unibo.sc.databinding.ActivityProductsBinding
+import it.unibo.sc.viewmodel.ProductsViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 
@@ -25,30 +26,23 @@ class ProductsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val button = binding.logoutButton
-
         button.setOnClickListener {
             deferredLogout = lifecycleScope.async {
                 singOutUser()
                 startMainActivity()
             }
         }
+
+        val model: ProductsViewModel by viewModels()
+        model.products().observe(this, { p ->
+            // update UI
+            Log.d("Products", p.map { it -> it.name }.toString())
+        })
     }
 
     override fun onDestroy() {
         super.onDestroy()
         if (deferredLogout.isActive) deferredLogout.cancel()
-    }
-
-    private suspend fun listProducts() {
-        val product = Product.builder()
-
-//        try {
-//
-//            val response = Amplify.API.query(ModelQuery.get(Product::class.java))
-//            Log.i("MyAmplifyApp", response.data.name)
-//        } catch (error: ApiException) {
-//            Log.e("MyAmplifyApp", "Query failed", error)
-//        }
     }
 
     private suspend fun singOutUser(): Int {

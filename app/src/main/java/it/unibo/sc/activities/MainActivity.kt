@@ -1,4 +1,4 @@
-package it.unibo.sc
+package it.unibo.sc.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.amplifyframework.AmplifyException
+import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.auth.result.AuthSignInResult
@@ -25,19 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        addAmplifyPlugins()
+
         val button = binding.loginButton
-
-        try {
-            Amplify.addPlugin(AWSCognitoAuthPlugin())
-            Amplify.configure(applicationContext)
-            Log.i("MainActivity", "Initialized Amplify")
-        } catch (error: AmplifyException) {
-            Log.e("MainActivity", "Could not inizialize Amplify", error)
-        }
-
         deferredSession = lifecycleScope.async {
             if (isUserAuthenticated()) {
                 Log.i("MainActivity", "User already logged in")
@@ -84,6 +78,17 @@ class MainActivity : AppCompatActivity() {
                 }
             } ?: Toast.makeText(applicationContext, "Error on Login process", Toast.LENGTH_LONG)
                 .show()
+        }
+    }
+
+    private fun addAmplifyPlugins() {
+        try {
+            Amplify.addPlugin(AWSCognitoAuthPlugin())
+            Amplify.addPlugin(AWSApiPlugin())
+            Amplify.configure(applicationContext)
+            Log.i("MainActivity", "Initialized Amplify")
+        } catch (error: AmplifyException) {
+            Log.e("MainActivity", "Could not inizialize Amplify", error)
         }
     }
 
