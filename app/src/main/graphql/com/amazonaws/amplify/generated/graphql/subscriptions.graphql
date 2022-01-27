@@ -13,11 +13,17 @@ subscription OnCreateProductWarehouse {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productWarehouseProductId
   }
 }
@@ -35,11 +41,17 @@ subscription OnUpdateProductWarehouse {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productWarehouseProductId
   }
 }
@@ -57,11 +69,17 @@ subscription OnDeleteProductWarehouse {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productWarehouseProductId
   }
 }
@@ -80,11 +98,17 @@ subscription OnCreateProductShelf {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productShelfProductId
   }
 }
@@ -103,11 +127,17 @@ subscription OnUpdateProductShelf {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productShelfProductId
   }
 }
@@ -126,11 +156,17 @@ subscription OnDeleteProductShelf {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productShelfProductId
   }
 }
@@ -147,6 +183,9 @@ subscription OnCreateProduct {
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 subscription OnUpdateProduct {
@@ -162,6 +201,9 @@ subscription OnUpdateProduct {
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 subscription OnDeleteProduct {
@@ -177,5 +219,8 @@ subscription OnDeleteProduct {
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }

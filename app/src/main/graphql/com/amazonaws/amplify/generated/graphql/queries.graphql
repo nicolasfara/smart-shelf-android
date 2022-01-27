@@ -13,11 +13,17 @@ query GetProductWarehouse($id: ID!) {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productWarehouseProductId
   }
 }
@@ -32,9 +38,39 @@ query ListProductWarehouses(
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       productWarehouseProductId
     }
     nextToken
+    startedAt
+  }
+}
+query SyncProductWarehouses(
+  $filter: ModelProductWarehouseFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncProductWarehouses(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      quantity
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      productWarehouseProductId
+    }
+    nextToken
+    startedAt
   }
 }
 query GetProductShelf($id: ID!) {
@@ -52,11 +88,17 @@ query GetProductShelf($id: ID!) {
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     quantity
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
     productShelfProductId
   }
 }
@@ -72,9 +114,40 @@ query ListProductShelves(
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
       productShelfProductId
     }
     nextToken
+    startedAt
+  }
+}
+query SyncProductShelves(
+  $filter: ModelProductShelfFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncProductShelves(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      shelfId
+      quantity
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      productShelfProductId
+    }
+    nextToken
+    startedAt
   }
 }
 query GetProduct($id: ID!) {
@@ -90,6 +163,9 @@ query GetProduct($id: ID!) {
     id
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 query ListProducts(
@@ -110,7 +186,43 @@ query ListProducts(
       id
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     nextToken
+    startedAt
+  }
+}
+query SyncProducts(
+  $filter: ModelProductFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncProducts(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      code
+      lot
+      name
+      price
+      promoPrice
+      inPromo
+      expirationDate
+      purchaseDate
+      id
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
   }
 }
