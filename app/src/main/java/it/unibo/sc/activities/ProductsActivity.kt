@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.map
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.kotlin.core.Amplify
 import it.unibo.sc.databinding.ActivityProductsBinding
@@ -36,7 +37,10 @@ class ProductsActivity : AppCompatActivity() {
         val model: ProductsViewModel by viewModels()
         model.products().observe(this, { p ->
             // update UI
-            Log.d("Products", p.map { it -> it.name }.toString())
+            p.map {
+                Log.d("ProductsList", it.toString())
+            }
+            Log.d("ProductsList", "cia")
         })
     }
 

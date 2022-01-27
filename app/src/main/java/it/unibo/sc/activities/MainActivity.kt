@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
             Amplify.configure(applicationContext)
             Log.i("MainActivity", "Initialized Amplify")
         } catch (error: AmplifyException) {
-            Log.e("MainActivity", "Could not inizialize Amplify", error)
+            Log.e("MainActivity", "Could not initialize Amplify", error)
         }
     }
 
