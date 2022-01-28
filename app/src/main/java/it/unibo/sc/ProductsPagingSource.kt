@@ -12,14 +12,15 @@ class ProductsPagingSource(private val graphQLData: ListProductsQuery) :
     PagingSource<String, Product>() {
     override suspend fun load(params: LoadParams<String>): LoadResult<String, Product> {
         return try {
-            Log.d("ProductsPagingSource", "cia")
-
             val page = params.key
             val response = graphQLData.getProducts(page)
             val items = response?.items?.toList() ?: emptyList()
             val nextToken = response?.requestForNextResult?.variables?.get("nextToken")
 
-            Log.d("ProductsPagingSource", response?.items.toString())
+            Log.d(
+                "ProductsPagingSource",
+                "page: $page, nextToken: $nextToken, items: ${items.map { it.name }}"
+            )
             LoadResult.Page(
                 data = items,
                 prevKey = null, // Only paging forward.
