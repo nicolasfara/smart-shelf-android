@@ -62,6 +62,7 @@ dependencies {
     implementation("com.amplifyframework:aws-auth-cognito:1.31.1")
     implementation("com.amplifyframework:aws-api:1.31.1")
     testImplementation("io.kotest:kotest-runner-junit5:5.0.3")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.0-M1")
     androidTestImplementation("io.kotest:kotest-assertions-core-jvm:5.0.3")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
