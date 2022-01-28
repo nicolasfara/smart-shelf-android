@@ -25,6 +25,8 @@ class ListProductsQuery() {
     private suspend fun listProducts(nextToken: String?, limit: Int): PaginatedResult<Product>? {
         return try {
             val res = Amplify.API.query(getProductsRequest(nextToken, limit))
+            Log.d("ListProductsQuery", res.data.items.map { it.name }.toString())
+
             Log.d("ListProductsQuery", "Query succeeded")
             res.data
         } catch (error: ApiException) {
