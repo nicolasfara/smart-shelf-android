@@ -39,7 +39,7 @@ class ProductsActivity : AppCompatActivity() {
         }
 
         val viewModel: ProductsViewModel by viewModels()
-        val pagingAdapter = ProductsAdapter(ProductComparator)
+        val pagingAdapter = ProductsAdapter(ProductComparator, this)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = pagingAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)

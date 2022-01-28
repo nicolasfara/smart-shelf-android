@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Smart shelf</string>
+    <string name="euro">%s€</string>
+    <string name="notifications">Notifications</string>
+    <string name="productsTitle">Products</string>
+    <string name="logout">Logout</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="loginTitle">Login</string>
+    <string name="sign_inTitle">Sign in</string>
 </resources>

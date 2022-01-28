@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="#C3C3C3"
+    android:background="@android:drawable/btn_default"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">
