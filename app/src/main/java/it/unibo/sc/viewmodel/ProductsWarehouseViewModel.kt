@@ -14,12 +14,14 @@ import kotlinx.coroutines.flow.Flow
  * Class that store and manage the ProductWarehouse elements.
  */
 class ProductsWarehouseViewModel : ViewModel() {
+    private val pageSize = 2
+
     /**
      * This method produces a stream of ProductWarehouse elements.
      *
      * @return A [Flow] that emits a stream of PagingData with [ProductWarehouse] elements.
      */
-    fun productsWarehouse() = Pager(PagingConfig(pageSize = 2)) {
+    fun productsWarehouse() = Pager(PagingConfig(pageSize = pageSize)) {
         ProductsWarehousePagingSource(ListProductsWarehouseQuery())
     }.flow
         .cachedIn(viewModelScope)
