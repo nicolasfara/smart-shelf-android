@@ -18,7 +18,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collectLatest
 
 /***
- * The product list activity.
+ * The ProductWarehouse list Activity.
  */
 class ProductsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductsBinding

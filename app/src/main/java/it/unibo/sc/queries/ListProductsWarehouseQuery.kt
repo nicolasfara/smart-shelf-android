@@ -1,4 +1,4 @@
-package it.unibo.sc
+package it.unibo.sc.queries
 
 import android.util.Log
 import com.amplifyframework.api.ApiException
@@ -12,11 +12,13 @@ import com.amplifyframework.kotlin.core.Amplify
 import com.amplifyframework.util.TypeMaker
 
 /**
- *
+ * GraphQL API.
  */
 class ListProductsWarehouseQuery() {
     /**
+     * This method fetches all the ProductWarehouse elements from the database.
      *
+     * @param nextToken the GraphQL token that indicates the next page to retrieve.
      */
     suspend fun getProductsWarehouse(nextToken: String?): PaginatedResult<ProductWarehouse>? {
         return listProductsWarehouse(nextToken, 2)
