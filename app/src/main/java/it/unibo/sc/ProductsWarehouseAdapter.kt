@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
 
 /**
- *
+ * A [PagingDataAdapter] of [ProductWarehouse].
  */
 class ProductsWarehouseAdapter(
     diffCallback: DiffUtil.ItemCallback<ProductWarehouse>,
@@ -16,7 +16,10 @@ class ProductsWarehouseAdapter(
 ) :
     PagingDataAdapter<ProductWarehouse, ProductWarehouseViewHolder>(diffCallback) {
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ProductWarehouseViewHolder {
+    override fun onCreateViewHolder(
+        viewGroup: ViewGroup,
+        viewType: Int
+    ): ProductWarehouseViewHolder {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.product_row, viewGroup, false)
         return ProductWarehouseViewHolder(view, context)
