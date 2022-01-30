@@ -5,18 +5,18 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
-import it.unibo.sc.ListProductsQuery
-import it.unibo.sc.ProductsPagingSource
+import it.unibo.sc.ListProductsWarehouseQuery
+import it.unibo.sc.ProductsWarehousePagingSource
 
 /**
  *
  */
-class ProductsViewModel : ViewModel() {
+class ProductsWarehouseViewModel : ViewModel() {
     /**
      *
      */
-    fun products() = Pager(PagingConfig(pageSize = 2)) {
-        ProductsPagingSource(ListProductsQuery())
+    fun productsWarehouse() = Pager(PagingConfig(pageSize = 2)) {
+        ProductsWarehousePagingSource(ListProductsWarehouseQuery())
     }.flow
         .cachedIn(viewModelScope)
 }
