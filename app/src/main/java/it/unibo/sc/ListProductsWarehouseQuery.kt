@@ -7,27 +7,31 @@ import com.amplifyframework.api.aws.AppSyncGraphQLRequest
 import com.amplifyframework.api.graphql.GraphQLRequest
 import com.amplifyframework.api.graphql.PaginatedResult
 import com.amplifyframework.api.graphql.QueryType
-import com.amplifyframework.datastore.generated.model.Product
+import com.amplifyframework.datastore.generated.model.ProductWarehouse
 import com.amplifyframework.kotlin.core.Amplify
 import com.amplifyframework.util.TypeMaker
 
 /**
  *
  */
-class ListProductsQuery() {
+class ListProductsWarehouseQuery() {
     /**
      *
      */
-    suspend fun getProducts(nextToken: String?): PaginatedResult<Product>? {
-        return listProducts(nextToken, 2)
+    suspend fun getProductsWarehouse(nextToken: String?): PaginatedResult<ProductWarehouse>? {
+        return listProductsWarehouse(nextToken, 2)
     }
 
-    private suspend fun listProducts(nextToken: String?, limit: Int): PaginatedResult<Product>? {
+    private suspend fun listProductsWarehouse(
+        nextToken: String?,
+        limit: Int?
+    ): PaginatedResult<ProductWarehouse>? {
         return try {
-            val res = Amplify.API.query(getProductsRequest(nextToken, limit))
-            Log.d("ListProductsQuery", res.data.items.map { it.name }.toString())
-
-            Log.d("ListProductsQuery", "Query succeeded")
+            val res = Amplify.API.query(productsWarehouseRequest(nextToken, limit))
+            Log.d(
+                "ListProductsQuery",
+                "Query succeeded ${res.data.items.map { it.product.name }}"
+            )
             res.data
         } catch (error: ApiException) {
             Log.e("ListProductsQuery", "Query failed", error)
@@ -35,16 +39,16 @@ class ListProductsQuery() {
         }
     }
 
-    private fun getProductsRequest(
+    private fun productsWarehouseRequest(
         nextToken: String?,
-        limit: Int
-    ): GraphQLRequest<PaginatedResult<Product>> {
+        limit: Int?
+    ): GraphQLRequest<PaginatedResult<ProductWarehouse>> {
         val responseType = TypeMaker.getParameterizedType(
             PaginatedResult::class.java,
-            Product::class.java
+            ProductWarehouse::class.java
         )
         return AppSyncGraphQLRequest.builder()
-            .modelClass(Product::class.java)
+            .modelClass(ProductWarehouse::class.java)
             .operation(QueryType.LIST)
             .responseType(responseType)
             .variable("limit", "Int", limit)

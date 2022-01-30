@@ -9,10 +9,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.kotlin.core.Amplify
-import it.unibo.sc.ProductsAdapter
+import it.unibo.sc.ProductsWarehouseAdapter
 import it.unibo.sc.databinding.ActivityProductsBinding
-import it.unibo.sc.utils.ProductComparator
-import it.unibo.sc.viewmodel.ProductsViewModel
+import it.unibo.sc.utils.ProductWarehouseComparator
+import it.unibo.sc.viewmodel.ProductsWarehouseViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.collectLatest
@@ -38,14 +38,14 @@ class ProductsActivity : AppCompatActivity() {
             }
         }
 
-        val viewModel: ProductsViewModel by viewModels()
-        val pagingAdapter = ProductsAdapter(ProductComparator, this)
+        val viewModel: ProductsWarehouseViewModel by viewModels()
+        val pagingAdapter = ProductsWarehouseAdapter(ProductWarehouseComparator, this)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = pagingAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         deferredShowProducts = lifecycleScope.async {
-            viewModel.products().collectLatest { p ->
+            viewModel.productsWarehouse().collectLatest { p ->
                 pagingAdapter.submitData(p)
             }
         }
