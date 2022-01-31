@@ -15,14 +15,15 @@ import it.unibo.sc.utils.ProductWarehouseComparator
 import it.unibo.sc.viewmodel.ProductsWarehouseViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /***
  * The ProductWarehouse list Activity.
  */
 class ProductsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductsBinding
-    private lateinit var deferredLogout: Deferred<Unit>
     private lateinit var deferredShowProducts: Deferred<Unit>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,7 @@ class ProductsActivity : AppCompatActivity() {
 
         val button = binding.logoutButton
         button.setOnClickListener {
-            deferredLogout = lifecycleScope.async {
+            lifecycleScope.launch {
                 singOutUser()
                 startMainActivity()
             }
@@ -53,7 +54,6 @@ class ProductsActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (deferredLogout.isActive) deferredLogout.cancel()
         if (deferredShowProducts.isActive) deferredShowProducts.cancel()
     }
 
