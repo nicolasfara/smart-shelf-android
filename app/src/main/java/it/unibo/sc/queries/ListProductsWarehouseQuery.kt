@@ -15,14 +15,17 @@ import com.amplifyframework.util.TypeMaker
  * GraphQL API.
  */
 class ListProductsWarehouseQuery() {
-    private val queryLimit = 2
+    private companion object {
+        const val QUERY_LIMIT = 2
+    }
+
     /**
      * This method fetches all the ProductWarehouse elements from the database.
      *
      * @param nextToken the GraphQL token that indicates the next page to retrieve.
      */
     suspend fun getProductsWarehouse(nextToken: String?): PaginatedResult<ProductWarehouse>? {
-        return listProductsWarehouse(nextToken, queryLimit)
+        return listProductsWarehouse(nextToken, QUERY_LIMIT)
     }
 
     private suspend fun listProductsWarehouse(
