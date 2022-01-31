@@ -18,8 +18,8 @@ class ProductWarehouseViewHolder(view: View, private val context: Context) :
      * Method that bind the UI elements with [ProductWarehouse] data.
      */
     fun bind(productWarehouse: ProductWarehouse?) {
-        productName.text = productWarehouse?.product?.name
+        productName.text = productWarehouse?.product?.name ?: ""
         productPrice.text =
-            context.getString(R.string.euro, productWarehouse?.product?.price.toString())
+            context.getString(R.string.euro, productWarehouse?.product?.price ?: "")
     }
 }
