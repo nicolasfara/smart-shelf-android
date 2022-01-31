@@ -6,11 +6,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.amplifyframework.AmplifyException
 import com.amplifyframework.api.aws.AWSApiPlugin
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.auth.result.AuthSignInResult
+import com.amplifyframework.core.Amplify.AlreadyConfiguredException
 import com.amplifyframework.kotlin.core.Amplify
 import it.unibo.sc.databinding.ActivityMainBinding
 import kotlinx.coroutines.Deferred
@@ -85,9 +85,10 @@ class MainActivity : AppCompatActivity() {
             Amplify.addPlugin(AWSCognitoAuthPlugin())
             Amplify.addPlugin(AWSApiPlugin())
             Amplify.configure(applicationContext)
-            Log.i("MainActivity", "Initialized Amplify")
-        } catch (error: AmplifyException) {
-            Log.e("MainActivity", "Could not initialize Amplify", error)
+
+            Log.i("AmplifyConfiguration", "Initialized Amplify")
+        } catch (error: AlreadyConfiguredException) {
+            Log.e("AmplifyConfiguration", "Amplify is already configured")
         }
     }
 
