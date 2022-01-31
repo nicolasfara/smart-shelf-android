@@ -15,6 +15,7 @@ import com.amplifyframework.kotlin.core.Amplify
 import it.unibo.sc.databinding.ActivityMainBinding
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 /**
  * The login activity.
@@ -22,7 +23,6 @@ import kotlinx.coroutines.async
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var deferredSession: Deferred<Unit>
-    private lateinit var deferredLogin: Deferred<Unit>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (deferredLogin.isActive) deferredLogin.cancel()
         if (deferredSession.isActive) deferredSession.cancel()
     }
 
@@ -68,7 +67,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loginProcess() {
-        deferredLogin = lifecycleScope.async {
+        lifecycleScope.launch {
             signInUser(binding.username.text.toString(), binding.password.text.toString())?.let {
                 if (it.isSignInComplete) {
                     Log.i("LoginProcess", "Authentication complete")
