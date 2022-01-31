@@ -61,7 +61,7 @@ dependencies {
     implementation("com.amplifyframework:aws-auth-cognito:1.31.2")
     implementation("com.amplifyframework:aws-api:1.31.2")
     implementation("androidx.paging:paging-runtime-ktx:3.1.0")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.8.0-M1")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("io.kotest:kotest-runner-junit5:5.0.3")
     androidTestImplementation("io.kotest:kotest-assertions-core-jvm:5.0.3")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
