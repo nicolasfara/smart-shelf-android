@@ -59,7 +59,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("com.amplifyframework:core-kotlin:0.15.2")
     implementation("com.amplifyframework:aws-auth-cognito:1.31.2")
-    implementation("com.amplifyframework:aws-api:1.31.1")
+    implementation("com.amplifyframework:aws-api:1.31.2")
     implementation("androidx.paging:paging-runtime-ktx:3.1.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.0-M1")
     testImplementation("io.kotest:kotest-runner-junit5:5.0.3")
