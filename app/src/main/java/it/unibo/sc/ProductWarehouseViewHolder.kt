@@ -20,6 +20,6 @@ class ProductWarehouseViewHolder(view: View, private val context: Context) :
     fun bind(productWarehouse: ProductWarehouse?) {
         productName.text = productWarehouse?.product?.name ?: ""
         productPrice.text =
-            context.getString(R.string.euro, productWarehouse?.product?.price ?: "")
+            context.getString(R.string.quantity, productWarehouse?.quantity ?: "")
     }
 }
