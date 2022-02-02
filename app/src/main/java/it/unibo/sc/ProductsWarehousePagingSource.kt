@@ -3,6 +3,7 @@ package it.unibo.sc
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.amplifyframework.api.graphql.model.ModelPagination
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
 import it.unibo.sc.queries.ListProductsWarehouseQuery
 
@@ -24,7 +25,7 @@ class ProductsWarehousePagingSource(private val graphQLData: ListProductsWarehou
         return LoadResult.Page(
             data = items,
             prevKey = null, // Only paging forward.
-            nextKey = nextToken.toString()
+            nextKey = if (response?.hasNextResult() == true) nextToken.toString() else null
         )
     }
 
