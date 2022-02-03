@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Smart shelf</string>
     <string name="quantity">Quantity: %s</string>
+    <string name="euro">%s€</string>
+    <string name="writeTag">WRITE TAG</string>
+    <string name="deleteProduct">DELETE PRODUCT</string>
     <string name="notifications">Notifications</string>
     <string name="productsTitle">Products</string>
     <string name="logout">Logout</string>
