@@ -11,4 +11,5 @@
     <string name="password">password</string>
     <string name="loginTitle">Login</string>
     <string name="sign_inTitle">Sign in</string>
+    <string name="nfc_icon">nfc icon</string>
 </resources>
