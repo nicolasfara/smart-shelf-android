@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.1.0")
+        classpath("com.android.tools.build:gradle:7.1.1")
         classpath(kotlin("gradle-plugin", version = "1.6.10"))
         classpath("com.amplifyframework:amplify-tools-gradle-plugin:1.0.2")
         // NOTE: Do not place your application dependencies here; they belong
