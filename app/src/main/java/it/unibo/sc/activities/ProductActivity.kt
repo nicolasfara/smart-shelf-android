@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import it.unibo.sc.databinding.ActivityProductBinding
+import it.unibo.sc.queries.ProductWarehouseQuantityUpdate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -23,13 +24,25 @@ import java.nio.charset.Charset
 class ProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductBinding
     private var nfcAdapter: NfcAdapter? = null
+    private var intentExtras: Bundle? = null
+    private var productCode: String? = null
+    private var productLot: Int? = null
+    private var productWarehouseId: String? = null
+    private var productWarehouseQuantity: Int? = null
+    private var productWarehouseProductId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("ON", "onCreate")
-
         binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        intentExtras = intent.extras
+
+        productCode = intentExtras?.getString("productCode")
+        productLot = intentExtras?.getInt("productLot")
+        productWarehouseId = intentExtras?.getString("productWarehouseId")
+        productWarehouseProductId = intentExtras?.getString("productWarehouseProductId")
+        productWarehouseQuantity = intentExtras?.getInt("productWarehouseQuantity")
 
         displayProductInfo()
 
@@ -48,7 +61,7 @@ class ProductActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        startForegroundDispatch()
+        enableForegroundDispatch()
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -56,7 +69,7 @@ class ProductActivity : AppCompatActivity() {
         handleIntent(intent)
     }
 
-    private fun startForegroundDispatch() {
+    private fun enableForegroundDispatch() {
         if (nfcAdapter != null && nfcAdapter?.isEnabled!!) {
             val intent = Intent(this, javaClass).apply {
                 addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
@@ -78,9 +91,9 @@ class ProductActivity : AppCompatActivity() {
         val productPriceText = binding.productInfoPrice
         val productExpiringDateText = binding.productInfoExpiringDate
 
-        productNameText.text = intent.extras?.get("productName").toString()
-        productPriceText.text = intent.extras?.get("productPrice").toString()
-        productExpiringDateText.text = intent.extras?.get("productExpiringDate").toString()
+        productNameText.text = intentExtras?.getString("productName")
+        productPriceText.text = intentExtras?.getDouble("productPrice").toString()
+        productExpiringDateText.text = intentExtras?.getString("productExpiringDate")
     }
 
     private fun handleIntent(intent: Intent) {
@@ -90,46 +103,55 @@ class ProductActivity : AppCompatActivity() {
             NfcAdapter.ACTION_NDEF_DISCOVERED == action
         ) {
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
+            Log.d(
+                "CIACIA",
+                "c: $productWarehouseId $productWarehouseQuantity $productWarehouseProductId"
+            )
             lifecycleScope.launch(Dispatchers.IO) {
-                writeTag(tagFromIntent)
+                if (writeTag(productCode, productLot, tagFromIntent))
+                    ProductWarehouseQuantityUpdate.decreaseQuantity(
+                        productWarehouseId,
+                        productWarehouseQuantity,
+                        productWarehouseProductId
+                    )
             }
         }
     }
 
-    private fun writeTag(tag: Tag?) {
-        val productCode = intent.extras?.get("productCode").toString()
-        val productLot = intent.extras?.get("productLot").toString()
-        if (productCode != "" && productLot != "") {
-            MifareClassic.get(tag)?.use { mifare ->
-                mifare.connect()
-                try {
-                    for (sectorIndex in 1..2) {
-                        val auth = mifare.authenticateSectorWithKeyA(
-                            sectorIndex,
-                            MifareClassic.KEY_DEFAULT
+    private fun writeTag(productCode: String?, productLot: Int?, tag: Tag?): Boolean {
+        try {
+            val mifare = MifareClassic.get(tag)
+            mifare.connect()
+            if (productCode != "" && productLot != null) {
+                for (sectorIndex in 1..2) {
+                    val auth = mifare.authenticateSectorWithKeyA(
+                        sectorIndex,
+                        MifareClassic.KEY_DEFAULT
+                    )
+                    if (auth) {
+                        val blockIndex = mifare.sectorToBlock(sectorIndex)
+                        val data = if (sectorIndex == 1) productCode else productLot.toString()
+                        mifare.writeBlock(blockIndex, data?.toByteArray()!!.copyOf(16))
+                        val payload = mifare.readBlock(blockIndex)
+                        val a = String(payload, Charset.forName("US-ASCII"))
+                        Log.d(
+                            "WriteTag",
+                            "sectorIndex: $sectorIndex blockIndex: $blockIndex blockData: $a"
                         )
-                        if (auth) {
-                            val blockIndex = mifare.sectorToBlock(sectorIndex)
-                            val data = if (sectorIndex == 1) productCode else productLot
-                            mifare.writeBlock(blockIndex, data.toByteArray().copyOf(16))
-                            val payload = mifare.readBlock(blockIndex)
-                            val a = String(payload, Charset.forName("US-ASCII"))
-                            Log.d(
-                                "WriteTag",
-                                "sectorIndex: $sectorIndex blockIndex: $blockIndex blockData: $a"
-                            )
-                        } else {
-                            Log.e("WriteTag", "Sector authentication failed ")
-                        }
+                    } else {
+                        Log.e("WriteTag", "Sector authentication failed ")
                     }
-                    toastNFCMessage("NFC tag written successfully")
-                } catch (e: IOException) {
-                    Log.d("WriteTag", e.printStackTrace().toString())
-                    toastNFCMessage("NFC tag reading error")
                 }
+                toastNFCMessage("NFC tag written successfully")
+                return true
+            } else {
+                Log.e("WriteTag", "No data to write")
+                return false
             }
-        } else {
-            Log.e("WriteTag", "No data to write")
+        } catch (e: IOException) {
+            Log.d("WriteTag", e.printStackTrace().toString())
+            toastNFCMessage("NFC tag reading error")
+            return false
         }
     }
 

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.amplifyframework.datastore.generated.model.Product
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
 import it.unibo.sc.activities.ProductActivity
 
@@ -31,18 +30,24 @@ class ProductsWarehouseAdapter(
     override fun onBindViewHolder(holder: ProductWarehouseViewHolder, position: Int) {
         val item = getItem(position)
         holder.productLayout.setOnClickListener {
-            startProductActivity(item?.product)
+            startProductActivity(item)
         }
         holder.bind(item)
     }
 
-    private fun startProductActivity(product: Product?) {
+    private fun startProductActivity(productWarehouse: ProductWarehouse?) {
         val intent = Intent(context, ProductActivity::class.java)
-        intent.putExtra("productName", product?.name ?: "")
-        intent.putExtra("productPrice", product?.price ?: "")
-        intent.putExtra("productExpiringDate", product?.expirationDate?.format() ?: "")
-        intent.putExtra("productCode", product?.code ?: "")
-        intent.putExtra("productLot", product?.lot ?: "")
+        intent.putExtra("productWarehouseId", productWarehouse?.id)
+        intent.putExtra("productWarehouseQuantity", productWarehouse?.quantity)
+        intent.putExtra("productWarehouseProductId", productWarehouse?.productWarehouseProductId)
+        intent.putExtra("productName", productWarehouse?.product?.name ?: "")
+        intent.putExtra("productPrice", productWarehouse?.product?.price ?: "")
+        intent.putExtra(
+            "productExpiringDate",
+            productWarehouse?.product?.expirationDate?.format() ?: ""
+        )
+        intent.putExtra("productCode", productWarehouse?.product?.code ?: "")
+        intent.putExtra("productLot", productWarehouse?.product?.lot)
         context.startActivity(intent)
     }
 }

@@ -34,6 +34,7 @@ class ListProductsWarehouseQuery() {
     ): PaginatedResult<ProductWarehouse>? {
         return try {
             val res = Amplify.API.query(productsWarehouseRequest(nextToken, limit))
+            Log.d("QUERY", res.data.items.map { it.id }.toString())
             res.data
         } catch (error: ApiException) {
             Log.e("ListProductsQuery", "Query failed", error)
