@@ -7,7 +7,7 @@ type ProductWarehouse @model {
     quantity: Int!
 }
 
-type ProductShelf @model {
+type ProductShelf @model @searchable {
     shelfId: Int!
     product: Product! @hasOne
     quantity: Int!

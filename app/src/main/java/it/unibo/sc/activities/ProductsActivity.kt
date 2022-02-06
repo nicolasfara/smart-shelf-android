@@ -15,7 +15,6 @@ import it.unibo.sc.utils.ProductWarehouseComparator
 import it.unibo.sc.viewmodel.ProductsWarehouseViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

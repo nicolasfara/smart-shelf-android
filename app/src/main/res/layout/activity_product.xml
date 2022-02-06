@@ -18,23 +18,6 @@
         app:layout_constraintVertical_bias="0.164">
 
         <LinearLayout
-            android:id="@+id/nfcLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="invisible">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/nfc_icon"
-                android:padding="50dp"
-                android:src="@drawable/ic_nfc_icon"
-                tools:ignore="ImageContrastCheck" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/productInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,7 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:padding="5dp"
                 android:textStyle="bold"
                 tools:text="@tools:sample/full_names" />
 
@@ -55,7 +37,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:padding="5dp"
                 android:textStyle="bold"
                 tools:text="@tools:sample/full_names" />
 
@@ -64,41 +45,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:padding="5dp"
                 android:textStyle="bold"
                 tools:text="@tools:sample/full_names" />
 
-            <TextView
-                android:id="@+id/textView8"
+            <ImageView
+                android:id="@+id/nfcIcon"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="83dp"
+                android:contentDescription="TODO"
                 android:gravity="center"
-                android:padding="5dp"
-                android:textStyle="bold"
-                tools:text="@tools:sample/full_names" />
+                app:srcCompat="@drawable/ic_nfc_icon" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/writeTagButton"
-        android:layout_width="164dp"
-        android:layout_height="48dp"
-        android:text="@string/writeTag"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/deleteProductButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:text="@string/deleteProduct"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/writeTagButton"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

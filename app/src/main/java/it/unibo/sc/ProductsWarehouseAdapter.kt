@@ -41,6 +41,8 @@ class ProductsWarehouseAdapter(
         intent.putExtra("productName", product?.name ?: "")
         intent.putExtra("productPrice", product?.price ?: "")
         intent.putExtra("productExpiringDate", product?.expirationDate?.format() ?: "")
+        intent.putExtra("productCode", product?.code ?: "")
+        intent.putExtra("productLot", product?.lot ?: "")
         context.startActivity(intent)
     }
 }
