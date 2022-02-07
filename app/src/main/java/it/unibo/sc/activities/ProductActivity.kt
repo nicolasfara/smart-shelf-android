@@ -15,7 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import it.unibo.sc.databinding.ActivityProductBinding
-import it.unibo.sc.queries.ProductWarehouseQuantityUpdate
+import it.unibo.sc.queries.ProductWarehouseManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -50,8 +50,18 @@ class ProductActivity : AppCompatActivity() {
         if (nfcAdapter != null && !nfcAdapter?.isEnabled!!) {
             showWirelessSettingsDialog()
         }
-
         val deleteProductButton = binding.deleteProductButton
+
+        deleteProductButton.setOnClickListener {
+            lifecycleScope.launch {
+                ProductWarehouseManager.deleteProductWarehouse(
+                    productWarehouseId,
+                    productWarehouseQuantity,
+                    productWarehouseProductId
+                )
+                startProductsActivity()
+            }
+        }
     }
 
     override fun onPause() {
@@ -67,6 +77,10 @@ class ProductActivity : AppCompatActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         handleIntent(intent)
+    }
+
+    private fun startProductsActivity() {
+        startActivity(Intent(this, ProductsActivity::class.java))
     }
 
     private fun enableForegroundDispatch() {
@@ -112,7 +126,7 @@ class ProductActivity : AppCompatActivity() {
             )
             lifecycleScope.launch(Dispatchers.IO) {
                 if (writeTag(productCode, productLot, tagFromIntent))
-                    ProductWarehouseQuantityUpdate.decreaseQuantity(
+                    ProductWarehouseManager.decreaseQuantity(
                         productWarehouseId,
                         productWarehouseQuantity,
                         productWarehouseProductId
