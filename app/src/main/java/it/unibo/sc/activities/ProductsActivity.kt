@@ -38,6 +38,20 @@ class ProductsActivity : AppCompatActivity() {
             }
         }
 
+        startPagination()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startPagination()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (deferredShowProducts.isActive) deferredShowProducts.cancel()
+    }
+
+    private fun startPagination() {
         val viewModel: ProductsWarehouseViewModel by viewModels()
         val pagingAdapter = ProductsWarehouseAdapter(ProductWarehouseComparator, this)
         val recyclerView = binding.recyclerView
@@ -49,11 +63,6 @@ class ProductsActivity : AppCompatActivity() {
                 pagingAdapter.submitData(p)
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (deferredShowProducts.isActive) deferredShowProducts.cancel()
     }
 
     private suspend fun singOutUser(): Int {
