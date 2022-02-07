@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.051" />
 
     <TextView
         android:id="@+id/textView2"
@@ -24,27 +24,12 @@
         android:layout_height="wrap_content"
         android:text="@string/productsTitle"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.121" />
-
-    <SearchView
-        android:id="@+id/searchView"
-        style="@android:style/Widget.Material.SearchView"
-        android:layout_width="375dp"
-        android:layout_height="53dp"
-        android:background="#00BCD4"
-        android:clickable="true"
-        app:actionViewClass="android.support.v7.widget.SearchView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.183" />
 
     <Button
         android:id="@+id/notificationsButton"
@@ -64,7 +49,6 @@
         android:layout_height="499dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

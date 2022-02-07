@@ -22,9 +22,10 @@ object ProductWarehouseQuantityUpdate {
             .productWarehouseProductId(productWarehouseProductId)
             .id(productWarehouseId)
             .build()
+
         try {
-            Amplify.API.mutate(ModelMutation.update(productWarehouse))
-            Log.i("ProductWarehouseQuantityUpdate", "Update succeeded")
+            val res = Amplify.API.mutate(ModelMutation.update(productWarehouse))
+            Log.i("ProductWarehouseQuantityUpdate", "Update succeeded $res")
         } catch (error: ApiException) {
             Log.e("ProductWarehouseQuantityUpdate", "Update failed", error)
         }

@@ -92,7 +92,10 @@ class ProductActivity : AppCompatActivity() {
         val productExpiringDateText = binding.productInfoExpiringDate
 
         productNameText.text = intentExtras?.getString("productName")
-        productPriceText.text = intentExtras?.getDouble("productPrice").toString()
+        productPriceText.text = this.getString(
+            it.unibo.sc.R.string.euro,
+            intentExtras?.getDouble("productPrice").toString()
+        )
         productExpiringDateText.text = intentExtras?.getString("productExpiringDate")
     }
 

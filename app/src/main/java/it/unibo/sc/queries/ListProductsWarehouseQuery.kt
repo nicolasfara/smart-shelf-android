@@ -13,7 +13,7 @@ import com.amplifyframework.util.TypeMaker
 
 /**
  * GraphQL API.
- */
+ */ 
 class ListProductsWarehouseQuery() {
     private companion object {
         const val QUERY_LIMIT = 2
@@ -34,7 +34,6 @@ class ListProductsWarehouseQuery() {
     ): PaginatedResult<ProductWarehouse>? {
         return try {
             val res = Amplify.API.query(productsWarehouseRequest(nextToken, limit))
-            Log.d("QUERY", res.data.items.map { it.id }.toString())
             res.data
         } catch (error: ApiException) {
             Log.e("ListProductsQuery", "Query failed", error)
