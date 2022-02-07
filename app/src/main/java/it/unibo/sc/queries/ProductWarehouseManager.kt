@@ -6,17 +6,13 @@ import com.amplifyframework.api.graphql.model.ModelMutation
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
 import com.amplifyframework.kotlin.core.Amplify
 
-object ProductWarehouseQuantityUpdate {
+object ProductWarehouseManager {
 
     suspend fun decreaseQuantity(
         productWarehouseId: String?,
         currentQuantity: Int?,
         productWarehouseProductId: String?
     ) {
-        Log.d(
-            "CIACIA",
-            "c: $productWarehouseId $currentQuantity $productWarehouseProductId"
-        )
         val productWarehouse = ProductWarehouse.builder()
             .quantity(currentQuantity?.minus(1))
             .productWarehouseProductId(productWarehouseProductId)
@@ -25,6 +21,25 @@ object ProductWarehouseQuantityUpdate {
 
         try {
             val res = Amplify.API.mutate(ModelMutation.update(productWarehouse))
+            Log.i("ProductWarehouseQuantityUpdate", "Update succeeded $res")
+        } catch (error: ApiException) {
+            Log.e("ProductWarehouseQuantityUpdate", "Update failed", error)
+        }
+    }
+
+    suspend fun deleteProductWarehouse(
+        productWarehouseId: String?,
+        currentQuantity: Int?,
+        productWarehouseProductId: String?
+    ) {
+        val productWarehouse = ProductWarehouse.builder()
+            .quantity(currentQuantity)
+            .productWarehouseProductId(productWarehouseProductId)
+            .id(productWarehouseId)
+            .build()
+
+        try {
+            val res = Amplify.API.mutate(ModelMutation.delete(productWarehouse))
             Log.i("ProductWarehouseQuantityUpdate", "Update succeeded $res")
         } catch (error: ApiException) {
             Log.e("ProductWarehouseQuantityUpdate", "Update failed", error)
