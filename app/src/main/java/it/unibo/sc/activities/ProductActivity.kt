@@ -120,10 +120,6 @@ class ProductActivity : AppCompatActivity() {
             NfcAdapter.ACTION_NDEF_DISCOVERED == action
         ) {
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
-            Log.d(
-                "CIACIA",
-                "c: $productWarehouseId $productWarehouseQuantity $productWarehouseProductId"
-            )
             lifecycleScope.launch(Dispatchers.IO) {
                 if (writeTag(productCode, productLot, tagFromIntent))
                     ProductWarehouseManager.decreaseQuantity(
@@ -141,10 +137,8 @@ class ProductActivity : AppCompatActivity() {
             mifare.connect()
             if (productCode != "" && productLot != null) {
                 for (sectorIndex in 1..2) {
-                    val auth = mifare.authenticateSectorWithKeyA(
-                        sectorIndex,
-                        MifareClassic.KEY_DEFAULT
-                    )
+                    val auth =
+                        mifare.authenticateSectorWithKeyA(sectorIndex, MifareClassic.KEY_DEFAULT)
                     if (auth) {
                         val blockIndex = mifare.sectorToBlock(sectorIndex)
                         val data = if (sectorIndex == 1) productCode else productLot.toString()

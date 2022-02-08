@@ -1,4 +1,4 @@
-package it.unibo.sc
+package it.unibo.sc.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
+import it.unibo.sc.R
 import it.unibo.sc.activities.ProductActivity
+import it.unibo.sc.holders.ProductWarehouseViewHolder
 
 /**
  * A [PagingDataAdapter] of [ProductWarehouse].

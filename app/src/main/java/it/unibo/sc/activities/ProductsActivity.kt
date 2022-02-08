@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.kotlin.core.Amplify
-import it.unibo.sc.ProductsWarehouseAdapter
+import it.unibo.sc.adapters.ProductsWarehouseAdapter
 import it.unibo.sc.databinding.ActivityProductsBinding
 import it.unibo.sc.utils.ProductWarehouseComparator
 import it.unibo.sc.viewmodel.ProductsWarehouseViewModel
@@ -30,12 +30,17 @@ class ProductsActivity : AppCompatActivity() {
         binding = ActivityProductsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val button = binding.logoutButton
-        button.setOnClickListener {
+        val logoutButton = binding.logoutButton
+        val notificationButton = binding.notificationsButton
+        logoutButton.setOnClickListener {
             lifecycleScope.launch {
                 singOutUser()
                 startMainActivity()
             }
+        }
+
+        notificationButton.setOnClickListener {
+            startNotificationsActivity()
         }
 
         startPagination()
@@ -76,5 +81,9 @@ class ProductsActivity : AppCompatActivity() {
 
     private fun startMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    private fun startNotificationsActivity() {
+        startActivity(Intent(this, NotificationsActivity::class.java))
     }
 }

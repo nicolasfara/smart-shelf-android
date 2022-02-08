@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
 import it.unibo.sc.ProductsWarehousePagingSource
-import it.unibo.sc.queries.ListProductsWarehouseQuery
+import it.unibo.sc.queries.ListProductsWarehouse
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -24,7 +24,7 @@ class ProductsWarehouseViewModel : ViewModel() {
      * @return A [Flow] that emits a stream of PagingData with [ProductWarehouse] elements.
      */
     fun productsWarehouse() = Pager(PagingConfig(pageSize = PAGE_SIZE)) {
-        ProductsWarehousePagingSource(ListProductsWarehouseQuery())
+        ProductsWarehousePagingSource(ListProductsWarehouse())
     }.flow
         .cachedIn(viewModelScope)
 }
