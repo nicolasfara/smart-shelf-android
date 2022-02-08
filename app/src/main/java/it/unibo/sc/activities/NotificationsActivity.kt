@@ -8,10 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import it.unibo.sc.adapters.ProductShelfAdapter
 import it.unibo.sc.databinding.ActivityNotificationsBinding
 import it.unibo.sc.utils.ProductShelfComparator
-import it.unibo.sc.viewmodel.NotificationsViewModel
+import it.unibo.sc.viewmodel.ProductsShelfViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * Activity that shows all the expiring products.
+ *
+ */
 class NotificationsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNotificationsBinding
 
@@ -20,7 +24,7 @@ class NotificationsActivity : AppCompatActivity() {
         binding = ActivityNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel: NotificationsViewModel by viewModels()
+        val viewModel: ProductsShelfViewModel by viewModels()
         val listAdapter = ProductShelfAdapter(ProductShelfComparator, this)
         val recyclerView = binding.notificationsRecyclerView
 

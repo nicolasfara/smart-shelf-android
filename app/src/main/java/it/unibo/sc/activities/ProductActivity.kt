@@ -21,6 +21,10 @@ import kotlinx.coroutines.launch
 import java.io.IOException
 import java.nio.charset.Charset
 
+/**
+ * Activity that shows product details and allows the corresponding tag writing with nfc.
+ *
+ */
 class ProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductBinding
     private var nfcAdapter: NfcAdapter? = null
@@ -121,12 +125,13 @@ class ProductActivity : AppCompatActivity() {
         ) {
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
             lifecycleScope.launch(Dispatchers.IO) {
-                if (writeTag(productCode, productLot, tagFromIntent))
+                if (writeTag(productCode, productLot, tagFromIntent)) {
                     ProductWarehouseManager.decreaseQuantity(
                         productWarehouseId,
                         productWarehouseQuantity,
                         productWarehouseProductId
                     )
+                }
             }
         }
     }
