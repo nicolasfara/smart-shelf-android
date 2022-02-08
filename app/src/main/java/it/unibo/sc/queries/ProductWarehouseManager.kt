@@ -6,8 +6,13 @@ import com.amplifyframework.api.graphql.model.ModelMutation
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
 import com.amplifyframework.kotlin.core.Amplify
 
+/**
+ * GraphQL API.
+ */
 object ProductWarehouseManager {
-
+    /**
+     * GraphQL API that decrease the ProductWarehouse quantity.
+     */
     suspend fun decreaseQuantity(
         productWarehouseId: String?,
         currentQuantity: Int?,
@@ -27,6 +32,9 @@ object ProductWarehouseManager {
         }
     }
 
+    /**
+     * GraphQL API that delete a ProductWarehouse.
+     */
     suspend fun deleteProductWarehouse(
         productWarehouseId: String?,
         currentQuantity: Int?,

@@ -9,6 +9,9 @@ import com.amplifyframework.datastore.generated.model.ProductShelf
 import it.unibo.sc.R
 import it.unibo.sc.holders.ProductShelfViewHolder
 
+/**
+ * A [ListAdapter] of [ProductShelf].
+ */
 class ProductShelfAdapter(
     diffCallback: DiffUtil.ItemCallback<ProductShelf>,
     private val context: Context

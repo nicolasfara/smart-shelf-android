@@ -7,9 +7,16 @@ import com.amplifyframework.datastore.generated.model.Product
 import com.amplifyframework.kotlin.core.Amplify
 import java.time.LocalDateTime
 
+/**
+ * GraphQL API.
+ */
 object ListProduct {
     private const val DAYS_TO_SUM = 20L
 
+    /**
+     * GraphQL API that gets all the Products.
+     *
+     */
     suspend fun products(): List<String> {
         return try {
             val expDate = LocalDateTime.now().plusDays(DAYS_TO_SUM).toString()

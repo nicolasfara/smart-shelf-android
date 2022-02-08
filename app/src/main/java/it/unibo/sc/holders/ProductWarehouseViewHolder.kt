@@ -15,6 +15,10 @@ class ProductWarehouseViewHolder(view: View, private val context: Context) :
     RecyclerView.ViewHolder(view) {
     private val productName: TextView = view.findViewById(R.id.productName)
     private val productPrice: TextView = view.findViewById(R.id.productPrice)
+
+    /**
+     * ProductLayout.
+     */
     val productLayout: LinearLayout = view.findViewById(R.id.productLayout)
 
     /**

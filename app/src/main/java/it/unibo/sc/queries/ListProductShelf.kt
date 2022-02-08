@@ -10,7 +10,16 @@ import com.amplifyframework.datastore.generated.model.ProductShelf
 import com.amplifyframework.kotlin.core.Amplify
 import com.amplifyframework.util.TypeMaker
 
+/**
+ * GraphQL API.
+ */
 object ListProductShelf {
+    /**
+     *
+     * GraphQL API that gets all the ProductShelf expiring with certain productId.
+     *
+     * @param productId the Id of the product on the shelf.
+     */
     suspend fun getExpiringProductShelf(productId: String): List<ProductShelf>? {
 
         val document = """
