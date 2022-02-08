@@ -14,7 +14,7 @@ import com.amplifyframework.util.TypeMaker
 /**
  * GraphQL API.
  */
-class ListProductsWarehouseQuery() {
+class ListProductsWarehouse() {
     private companion object {
         const val QUERY_LIMIT = 2
     }
@@ -25,15 +25,8 @@ class ListProductsWarehouseQuery() {
      * @param nextToken the GraphQL token that indicates the next page to retrieve.
      */
     suspend fun getProductsWarehouse(nextToken: String?): PaginatedResult<ProductWarehouse>? {
-        return listProductsWarehouse(nextToken, QUERY_LIMIT)
-    }
-
-    private suspend fun listProductsWarehouse(
-        nextToken: String?,
-        limit: Int?
-    ): PaginatedResult<ProductWarehouse>? {
         return try {
-            val res = Amplify.API.query(productsWarehouseRequest(nextToken, limit))
+            val res = Amplify.API.query(productsWarehouseRequest(nextToken))
             res.data
         } catch (error: ApiException) {
             Log.e("ListProductsQuery", "Query failed", error)
@@ -42,8 +35,7 @@ class ListProductsWarehouseQuery() {
     }
 
     private fun productsWarehouseRequest(
-        nextToken: String?,
-        limit: Int?
+        nextToken: String?
     ): GraphQLRequest<PaginatedResult<ProductWarehouse>> {
         val responseType = TypeMaker.getParameterizedType(
             PaginatedResult::class.java,
@@ -53,7 +45,7 @@ class ListProductsWarehouseQuery() {
             .modelClass(ProductWarehouse::class.java)
             .operation(QueryType.LIST)
             .responseType(responseType)
-            .variable("limit", "Int", limit)
+            .variable("limit", "Int", QUERY_LIMIT)
             .variable("nextToken", "String", nextToken)
             .requestOptions(ApiGraphQLRequestOptions())
             .build()

@@ -4,12 +4,12 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
-import it.unibo.sc.queries.ListProductsWarehouseQuery
+import it.unibo.sc.queries.ListProductsWarehouse
 
 /**
  * Class that loads pages of ProductWarehouse by page token.
  */
-class ProductsWarehousePagingSource(private val graphQLData: ListProductsWarehouseQuery) :
+class ProductsWarehousePagingSource(private val graphQLData: ListProductsWarehouse) :
     PagingSource<String, ProductWarehouse>() {
     override suspend fun load(params: LoadParams<String>): LoadResult<String, ProductWarehouse> {
         val page = params.key

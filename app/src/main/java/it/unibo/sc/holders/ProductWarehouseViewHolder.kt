@@ -1,4 +1,4 @@
-package it.unibo.sc
+package it.unibo.sc.holders
 
 import android.content.Context
 import android.view.View
@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.amplifyframework.datastore.generated.model.ProductWarehouse
+import it.unibo.sc.R
 
 /**
  * A [RecyclerView.ViewHolder] of [ProductWarehouse].

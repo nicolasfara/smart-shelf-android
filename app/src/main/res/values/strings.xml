@@ -5,6 +5,10 @@
     <string name="writeTag">WRITE TAG</string>
     <string name="deleteProduct">DELETE PRODUCT</string>
     <string name="notifications">Notifications</string>
+    <string name="shelfId">Shelf: %s</string>
+    <string name="productCode">Product Code: %s</string>
+    <string name="productLot">Product Lot: %s</string>
+    <string name="expiringDate">Expiring Date: %s</string>
     <string name="productsTitle">Products</string>
     <string name="logout">Logout</string>
     <string name="username">username</string>
@@ -12,4 +16,5 @@
     <string name="loginTitle">Login</string>
     <string name="sign_inTitle">Sign in</string>
     <string name="nfc_icon">nfc icon</string>
+    <string name="expiring_products">Expiring products</string>
 </resources>
