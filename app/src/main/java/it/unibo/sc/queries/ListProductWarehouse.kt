@@ -14,7 +14,7 @@ import com.amplifyframework.util.TypeMaker
 /**
  * GraphQL API.
  */
-class ListProductsWarehouse() {
+class ListProductWarehouse() {
     private companion object {
         const val QUERY_LIMIT = 2
     }

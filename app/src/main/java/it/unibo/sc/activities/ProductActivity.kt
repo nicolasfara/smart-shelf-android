@@ -16,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import it.unibo.sc.databinding.ActivityProductBinding
 import it.unibo.sc.queries.ProductWarehouseManager
+import it.unibo.sc.utils.NfcOperationsManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
-import java.nio.charset.Charset
 
 /**
  * Activity that shows product details and allows the corresponding tag writing with nfc.
@@ -52,10 +52,10 @@ class ProductActivity : AppCompatActivity() {
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         if (nfcAdapter != null && !nfcAdapter?.isEnabled!!) {
-            showWirelessSettingsDialog()
+            showNFCSettingsDialog()
         }
-        val deleteProductButton = binding.deleteProductButton
 
+        val deleteProductButton = binding.deleteProductButton
         deleteProductButton.setOnClickListener {
             lifecycleScope.launch {
                 ProductWarehouseManager.deleteProductWarehouse(
@@ -125,7 +125,7 @@ class ProductActivity : AppCompatActivity() {
         ) {
             val tagFromIntent: Tag? = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG)
             lifecycleScope.launch(Dispatchers.IO) {
-                if (writeTag(productCode, productLot, tagFromIntent)) {
+                if (verifyTagWriting(productCode, productLot, tagFromIntent)) {
                     ProductWarehouseManager.decreaseQuantity(
                         productWarehouseId,
                         productWarehouseQuantity,
@@ -136,42 +136,24 @@ class ProductActivity : AppCompatActivity() {
         }
     }
 
-    private fun writeTag(productCode: String?, productLot: Int?, tag: Tag?): Boolean {
-        try {
-            val mifare = MifareClassic.get(tag)
-            mifare.connect()
-            if (productCode != "" && productLot != null) {
-                for (sectorIndex in 1..2) {
-                    val auth =
-                        mifare.authenticateSectorWithKeyA(sectorIndex, MifareClassic.KEY_DEFAULT)
-                    if (auth) {
-                        val blockIndex = mifare.sectorToBlock(sectorIndex)
-                        val data = if (sectorIndex == 1) productCode else productLot.toString()
-                        mifare.writeBlock(blockIndex, data?.toByteArray()!!.copyOf(16))
-                        val payload = mifare.readBlock(blockIndex)
-                        val a = String(payload, Charset.forName("US-ASCII"))
-                        Log.d(
-                            "WriteTag",
-                            "sectorIndex: $sectorIndex blockIndex: $blockIndex blockData: $a"
-                        )
-                    } else {
-                        Log.e("WriteTag", "Sector authentication failed ")
-                    }
-                }
+    private fun verifyTagWriting(productCode: String?, productLot: Int?, tag: Tag?): Boolean {
+        return try {
+            if (tag != null && productCode != "" && productLot != null) {
+                NfcOperationsManager.writeTag(tag, productCode!!, productLot)
                 toastNFCMessage("NFC tag written successfully")
-                return true
+                true
             } else {
-                Log.e("WriteTag", "No data to write")
-                return false
+                Log.e("VerifyTagWriting", "No data to write")
+                false
             }
         } catch (e: IOException) {
-            Log.d("WriteTag", e.printStackTrace().toString())
+            Log.d("VerifyTagWriting", e.printStackTrace().toString())
             toastNFCMessage("NFC tag reading error")
-            return false
+            false
         }
     }
 
-    private fun showWirelessSettingsDialog() {
+    private fun showNFCSettingsDialog() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Enable NFC.")
         builder.setPositiveButton(R.string.ok) { _, _ ->
