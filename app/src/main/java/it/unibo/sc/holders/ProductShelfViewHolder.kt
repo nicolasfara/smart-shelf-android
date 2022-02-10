@@ -13,6 +13,7 @@ import it.unibo.sc.R
 class ProductShelfViewHolder(view: View, private val context: Context) :
     RecyclerView.ViewHolder(view) {
     private val shelfId: TextView = view.findViewById(R.id.shelfId)
+    private val productShelfName: TextView = view.findViewById(R.id.productShelfName)
     private val productCode: TextView = view.findViewById(R.id.productCode)
     private val productLot: TextView = view.findViewById(R.id.productLot)
     private val expiringDate: TextView = view.findViewById(R.id.expiringDate)
@@ -22,6 +23,8 @@ class ProductShelfViewHolder(view: View, private val context: Context) :
      */
     fun bind(productShelf: ProductShelf?) {
         shelfId.text = context.getString(R.string.shelfId, productShelf?.shelfId ?: "")
+        productShelfName.text =
+            context.getString(R.string.productShelfName, productShelf?.product?.name ?: "")
         productCode.text =
             context.getString(R.string.productCode, productShelf?.product?.code ?: "")
         productLot.text = context.getString(R.string.productLot, productShelf?.product?.lot ?: "")

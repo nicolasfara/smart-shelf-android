@@ -13,17 +13,25 @@
     <TextView
         android:id="@+id/shelfId"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="35dp"
         android:padding="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#121212"
         android:textStyle="bold"
         tools:text="@tools:sample/full_names" />
-
+    <TextView
+        android:id="@+id/productShelfName"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:padding="5dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#121212"
+        android:textStyle="bold"
+        tools:text="@tools:sample/full_names" />
     <TextView
         android:id="@+id/productCode"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="35dp"
         android:padding="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#121212"
@@ -33,7 +41,7 @@
     <TextView
         android:id="@+id/productLot"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="35dp"
         android:padding="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#121212"
@@ -42,10 +50,11 @@
     <TextView
         android:id="@+id/expiringDate"
         android:layout_width="match_parent"
-        android:layout_height="49dp"
+        android:layout_height="35dp"
         android:padding="5dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#121212"
         android:textStyle="bold"
         tools:text="@tools:sample/full_names" />
+
 </LinearLayout>

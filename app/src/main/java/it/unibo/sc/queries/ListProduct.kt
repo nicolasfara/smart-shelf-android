@@ -11,7 +11,7 @@ import java.time.LocalDateTime
  * GraphQL API.
  */
 object ListProduct {
-    private const val DAYS_TO_SUM = 20L
+    private const val DAYS_TO_SUM = 2L
 
     /**
      * GraphQL API that gets all the Products.
