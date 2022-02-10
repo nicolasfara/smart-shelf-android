@@ -16,7 +16,7 @@ import com.amplifyframework.util.TypeMaker
  */
 class ListProductWarehouse() {
     private companion object {
-        const val QUERY_LIMIT = 2
+        const val QUERY_LIMIT = 20
     }
 
     /**
