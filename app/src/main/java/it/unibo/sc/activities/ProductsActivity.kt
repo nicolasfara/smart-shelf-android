@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.amplifyframework.auth.AuthException
 import com.amplifyframework.kotlin.core.Amplify
 import it.unibo.sc.adapters.ProductsWarehouseAdapter
@@ -24,12 +25,14 @@ import kotlinx.coroutines.launch
 class ProductsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductsBinding
     private lateinit var deferredShowProducts: Deferred<Unit>
+    private val viewModel: ProductsWarehouseViewModel by viewModels()
+    private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductsBinding.inflate(layoutInflater)
+        swipeContainer = binding.swipeContainer
         setContentView(binding.root)
-
         val logoutButton = binding.logoutButton
         val notificationButton = binding.notificationsButton
         logoutButton.setOnClickListener {
@@ -44,11 +47,15 @@ class ProductsActivity : AppCompatActivity() {
         }
 
         startPagination()
+
+        swipeContainer.setOnRefreshListener {
+            viewModel.refresh()
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        startPagination()
+        viewModel.refresh()
     }
 
     override fun onDestroy() {
@@ -57,7 +64,6 @@ class ProductsActivity : AppCompatActivity() {
     }
 
     private fun startPagination() {
-        val viewModel: ProductsWarehouseViewModel by viewModels()
         val pagingAdapter = ProductsWarehouseAdapter(ProductWarehouseComparator, this)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = pagingAdapter
@@ -66,6 +72,7 @@ class ProductsActivity : AppCompatActivity() {
         deferredShowProducts = lifecycleScope.async {
             viewModel.productsWarehouse().collectLatest { p ->
                 pagingAdapter.submitData(p)
+                swipeContainer.isRefreshing = false
             }
         }
     }
