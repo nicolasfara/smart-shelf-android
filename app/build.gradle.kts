@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("it.nicolasfarabegoli.conventional-commits") version "1.0.2"
+    id("it.nicolasfarabegoli.conventional-commits") version "1.0.3"
     id("io.gitlab.arturbosch.detekt") version "1.19.0"
 }
 
