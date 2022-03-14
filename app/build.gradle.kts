@@ -64,7 +64,7 @@ dependencies {
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     testImplementation("io.kotest:kotest-runner-junit5:5.2.0")
-    androidTestImplementation("io.kotest:kotest-assertions-core-jvm:5.2.0")
+    androidTestImplementation("io.kotest:kotest-assertions-core-jvm:5.2.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.19.0")
