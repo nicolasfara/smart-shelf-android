@@ -57,7 +57,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
     implementation("com.google.android.material:material:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
-    implementation("com.amplifyframework:core-kotlin:0.16.2")
+    implementation("com.amplifyframework:core-kotlin:0.17.0")
     implementation("com.amplifyframework:aws-auth-cognito:1.32.2")
     implementation("com.amplifyframework:aws-api:1.33.0")
     implementation("androidx.paging:paging-runtime-ktx:3.1.1")
